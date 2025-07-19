@@ -33,7 +33,7 @@ class BlockedIP(models.Model):
     Model to store IP addresses that should be blocked.
     """
     ip_address = models.GenericIPAddressField(
-        unique=True, # Ensure each IP is unique in the blacklist
+        unique=True, 
         verbose_name="Blocked IP Address",
         help_text="The IP address to block."
     )
