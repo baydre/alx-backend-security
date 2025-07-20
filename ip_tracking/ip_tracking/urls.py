@@ -20,7 +20,7 @@ from tracking_ip import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', views.index, name='index'),
+    path('index/', views.index, name='index'),
     path('login/', views.login_view, name='login_view'),
     path('', views.home_view, name='home_view'),
     path('api/test/', views.api_test, name='api_test'),
