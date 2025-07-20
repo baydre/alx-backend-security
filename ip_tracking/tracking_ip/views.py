@@ -7,9 +7,9 @@ from ipware import get_client_ip
 from django_ratelimit.decorators import ratelimit
 import json
 
-# def index(request):
-#     """Simple index view to test IP tracking."""
-#     return render(request, 'tracking_ip/index.html')
+def index(request):
+    """Simple index view to test IP tracking."""
+    return render(request, 'tracking_ip/index.html')
 
 
 @ratelimit(key='ip', rate='5/m', block=True, method=['GET', 'POST'])
