@@ -66,3 +66,32 @@ class BlockedIP(models.Model):
 
     def __str__(self):
         return self.ip_address
+
+
+class SuspiciousIP(models.Model):
+    """
+    Model to store IP addresses flagged as suspicious.
+    """
+    ip_address = models.GenericIPAddressField(
+        unique=True,
+        verbose_name="Suspicious IP Address",
+        help_text="The IP address flagged as suspicious."
+    )
+    reason = models.TextField(
+        verbose_name="Reason for Flagging",
+        help_text="Why this IP was flagged as suspicious."
+    )
+    flagged_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Flagged At",
+        help_text="The time the IP was flagged."
+    )
+    # You could add more fields like 'is_blocked' or 'severity'
+
+    class Meta:
+        verbose_name = "Suspicious IP"
+        verbose_name_plural = "Suspicious IPs"
+        ordering = ['-flagged_at']
+
+    def __str__(self):
+        return f"{self.ip_address} - {self.reason}"

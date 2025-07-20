@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RequestLog, BlockedIP #, SuspiciousIP
+from .models import RequestLog, BlockedIP, SuspiciousIP
 
 @admin.register(RequestLog)
 class RequestLogAdmin(admin.ModelAdmin):
@@ -12,10 +12,9 @@ class RequestLogAdmin(admin.ModelAdmin):
 class BlockedIPAdmin(admin.ModelAdmin):
     list_display = ('ip_address', 'created_at')
     search_fields = ('ip_address',)
-"""
+
 @admin.register(SuspiciousIP)
 class SuspiciousIPAdmin(admin.ModelAdmin):
     list_display = ('ip_address', 'reason', 'flagged_at')
     list_filter = ('reason',)
     search_fields = ('ip_address', 'reason')
-"""

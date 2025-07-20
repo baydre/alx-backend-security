@@ -149,3 +149,21 @@ GEOIP_PATH = os.path.join(BASE_DIR, 'geoip', 'GeoLite2-City.mmdb')
 
 # Optional: Configure the default cache for django-ratelimit (it uses 'default' by default)
 # RATELIMIT_DEFAULT_CACHE = 'default'
+
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0' # Use database 0 for Celery broker
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0' # Same for results (optional)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC' # Or your local timezone
+CELERY_ENABLE_UTC = True
+
+# Celery Beat settings for scheduled tasks
+CELERY_BEAT_SCHEDULE = {
+    'detect-anomalies-hourly': {
+        'task': 'ip_tracking.tasks.detect_anomalies', # Path to your task
+        'schedule': 3600.0, # Run every 3600 seconds (1 hour)
+        # 'schedule': timedelta(minutes=1), # For testing, run every minute
+    },
+}
