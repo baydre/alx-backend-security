@@ -1,0 +1,10 @@
+*__pycache__/
+*pyc
+.venv
+*main.py
+*.db
+*.sql
+*.sqlite3
+*.python-version
+*pyproject.toml
+*uv.lock
