@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ipware',  # in place of 'django_ipgeolocation'
+    'django_ratelimit',
     'tracking_ip',
 ]
 
@@ -145,3 +146,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Ensure this path points to the directory containing your GeoLite2-City.mmdb file.
 # Example: if GeoLite2-City.mmdb is in 'your_project_name/geoip/'
 GEOIP_PATH = os.path.join(BASE_DIR, 'geoip', 'GeoLite2-City.mmdb')
+
+# Optional: Configure the default cache for django-ratelimit (it uses 'default' by default)
+# RATELIMIT_DEFAULT_CACHE = 'default'

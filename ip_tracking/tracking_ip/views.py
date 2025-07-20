@@ -1,15 +1,29 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import models
 from .models import RequestLog
 from ipware import get_client_ip
+from django_ratelimit.decorators import ratelimit
 import json
 
+# def index(request):
+#     """Simple index view to test IP tracking."""
+#     return render(request, 'tracking_ip/index.html')
 
-def index(request):
-    """Simple index view to test IP tracking."""
-    return render(request, 'tracking_ip/index.html')
+
+@ratelimit(key='ip', rate='5/m', block=True, method=['GET', 'POST'])
+def login_view(request):
+    """
+    A dummy login view to apply rate limiting.
+    """
+    return HttpResponse("Welcome to the login page! (Or you were rate-limited)")
+
+def home_view(request):
+    """
+    A simple home page view.
+    """
+    return HttpResponse("Welcome to the Home Page!")
 
 
 def api_test(request):
