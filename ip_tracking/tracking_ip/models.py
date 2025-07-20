@@ -19,13 +19,29 @@ class RequestLog(models.Model):
         help_text="The path of the requested URL."
     )
 
+    country = models.CharField(
+        max_length=100,
+        blank=True, # Allow empty, as geolocation might fail or not be available
+        null=True,
+        verbose_name="Country",
+        help_text="Country derived from IP geolocation."
+    )
+    city = models.CharField(
+        max_length=100,
+        blank=True, # Allow empty
+        null=True,
+        verbose_name="City",
+        help_text="City derived from IP geolocation."
+    )
+
     class Meta:
         verbose_name = "Request Log"
         verbose_name_plural = "Request Logs"
-        ordering = ['-timestamp'] # Order by most recent first
+        ordering = ['-timestamp']
 
     def __str__(self):
-        return f"[{self.timestamp.strftime('%Y-%m-%d %H:%M:%S')}] {self.ip_address} - {self.path}"
+        geo_info = f" ({self.city}, {self.country})" if self.city or self.country else ""
+        return f"[{self.timestamp.strftime('%Y-%m-%d %H:%M:%S')}] {self.ip_address}{geo_info} - {self.path}"
 
 
 class BlockedIP(models.Model):
